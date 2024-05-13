@@ -93,14 +93,14 @@ ultra_count = 0
 for i in range(COLLECTION_SIZE):
     directory = "out"
     path = "{dir}/{name}.json".format(dir = directory, name=str(i))
-    with open("in/GP.json", "r") as data:
+    with open(path, "r") as data:
         # metadata
         md = json.load(data);
 
     attr = md["attributes"][0]["value"]
-    if md["attributes"][0]["value"] == "Ultra":
+    if attr == "Ultra":
         ultra_count += 1
-    elif md["attributes"][0]["value"] == "Normal":
+    elif attr == "Normal":
 
         normal_count += 1
 
