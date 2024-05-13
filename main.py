@@ -90,6 +90,8 @@ for idx, is_ultra in enumerate(is_ultra_list):
 # Print Sanity Check Counts
 normal_count = 0
 ultra_count = 0
+
+print("Distribution Map")
 for i in range(COLLECTION_SIZE):
     directory = "out"
     path = "{dir}/{name}.json".format(dir = directory, name=str(i))
@@ -100,9 +102,13 @@ for i in range(COLLECTION_SIZE):
     attr = md["attributes"][0]["value"]
     if attr == "Ultra":
         ultra_count += 1
+        print("!", end="")
     elif attr == "Normal":
-
         normal_count += 1
+        print("|", end="")
+
+# ensure newline
+print()
 
 print("No. of Normal", normal_count, "/", NORMAL_COUNT, normal_count == NORMAL_COUNT)
 print("No. of Ultra", ultra_count, "/", ULTRA_COUNT, ultra_count == ULTRA_COUNT)
