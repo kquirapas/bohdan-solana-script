@@ -1,0 +1,31 @@
+{
+  "name": "Genesis Pass #",
+  "symbol": "GP",
+  "description": "Uniting sports and fantasy people on Solana",
+  "seller_fee_basis_points": 500,
+  "image": "0.png",
+  "external_url": "https://twitter.com/DecFanBet",
+  "edition": 0,
+  "attributes": [
+    {
+      "trait_type": "Tier",
+      "value": "Ultra"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "0.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": [
+      {
+        "address": "4HBs7LvGyUHgLnMpFkBe4Sn7hhoTAf8CjujdLAqy5rkq",
+        "share": 100
+      }
+    ]
+  }
+}
+
