@@ -69,10 +69,10 @@ for idx, is_ultra in enumerate(is_ultra_list):
     else:
         # apply metadata changes
         image_file = "{index}.png".format(index=idx)
-        ultra_metadata["name"] = COLLECTION_NAME + " #" + str(idx)
-        ultra_metadata["image"] = image_file
-        ultra_metadata["edition"] = idx
-        ultra_metadata["properties"]["files"][0]["uri"] = image_file
+        normal_metadata["name"] = COLLECTION_NAME + " #" + str(idx)
+        normal_metadata["image"] = image_file
+        normal_metadata["edition"] = idx
+        normal_metadata["properties"]["files"][0]["uri"] = image_file
 
         serialized_metadata = json.dumps(normal_metadata, indent=4)
 
