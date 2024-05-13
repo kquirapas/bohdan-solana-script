@@ -8,14 +8,12 @@ import random
 import shutil
 import pathlib 
 
- 
-def copy_and_rename(src_path, dest_path):
-    # Copy the file
-    shutil.copy(src_path, dest_path)
-
-    # Rename the copied file
-    # new_path = f"{dest_path}/{new_name}"
-    # shutil.move(f"{dest_path}/{src_path}", new_path)
+# Configuration
+COLLECTION_NAME = "Genesis Pass"
+COLLECTION_SIZE = 5000
+NORMAL_COUNT = 4500
+ULTRA_COUNT = 500
+OUTPUT_DIRECTORY_NAME = "assets"
 
 with open("in/GP.json", "r") as data:
     # Reading from JSON file
@@ -24,12 +22,6 @@ with open("in/GP.json", "r") as data:
 with open("in/GPU.json", "r") as data:
     # Reading from JSON file
     ultra_metadata = json.load(data);
-
-
-COLLECTION_NAME = "Genesis Pass"
-COLLECTION_SIZE = 5000
-NORMAL_COUNT = 4500
-ULTRA_COUNT = 500
 
 # list for indices of ultra passes
 index_ultra_list = [];
@@ -56,16 +48,15 @@ for idx, is_ultra in enumerate(is_ultra_list):
 
         serialized_metadata = json.dumps(ultra_metadata, indent=4)
 
-        directory = "out"
         filename = "{name}.json".format(name = str(idx))
-        path = "{dir}/{name}.json".format(dir = directory, name=str(idx))
+        path = "{dir}/{name}.json".format(dir = OUTPUT_DIRECTORY_NAME, name=str(idx))
 
         # write the metadata JSON
         with open(path, "w") as outfile:
             outfile.write(serialized_metadata)
 
         # write the PNG
-        copy_and_rename("in/GPU.png", "out/{index}.png".format(index=idx))
+        shutil.copy("in/GPU.png", "{outdir}/{index}.png".format(outdir=OUTPUT_DIRECTORY_NAME, index=idx))
     else:
         # apply metadata changes
         image_file = "{index}.png".format(index=idx)
@@ -76,16 +67,19 @@ for idx, is_ultra in enumerate(is_ultra_list):
 
         serialized_metadata = json.dumps(normal_metadata, indent=4)
 
-        directory = "out"
         filename = "{name}.json".format(name = str(idx))
-        path = "{dir}/{name}.json".format(dir = directory, name=str(idx))
+        path = "{dir}/{name}.json".format(dir = OUTPUT_DIRECTORY_NAME, name=str(idx))
 
         # write the metadata JSON
         with open(path, "w") as outfile:
             outfile.write(serialized_metadata)
 
         # write the PNG
-        copy_and_rename("in/GP.png", "out/{index}.png".format(index=idx))
+        shutil.copy("in/GP.png", "{outdir}/{index}.png".format(outdir=OUTPUT_DIRECTORY_NAME,index=idx))
+
+# Create `collection.png` and `collection.json` files from first NFT
+shutil.copy("assets/0.png", "assets/collection.png")
+shutil.copy("assets/0.json", "assets/collection.json")
 
 # Print Sanity Check Counts
 normal_count = 0
@@ -93,8 +87,7 @@ ultra_count = 0
 
 print("Distribution Map")
 for i in range(COLLECTION_SIZE):
-    directory = "out"
-    path = "{dir}/{name}.json".format(dir = directory, name=str(i))
+    path = "{dir}/{name}.json".format(dir = OUTPUT_DIRECTORY_NAME, name=str(i))
     with open(path, "r") as data:
         # metadata
         md = json.load(data);
